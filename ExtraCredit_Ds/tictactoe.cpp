@@ -2,32 +2,34 @@
 #include <string> //Includes the string library 
 #include <iomanip> 
 #include <fstream>
-using namespace std;
-int main()  //the main function
+using namespace std;  
+char board[3][3]{ {'0','1','2'},{'3','4','5'},{'6','7','8'} };
+int main() //the main function
 {
-	char board[3][3]{ {'0','1','2'},{'3','4','5'},{'6','7','8'} };
+	char board[3][3]{ {'0','1','2'},{'3','4','5'},{'6','7','8'} }; 
 	bool win = false;
-	int board_input;
+	int board_inputp1, board_inputp2 = 0;
 	cout << "Welcome to Tic Tac Toe" << endl;   
-	cout << "For reference:" << endl;
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
-		{
-			if (i == 1 and j == 0)
-			{
-				cout << endl;
+	do { 
+		// Board Output
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++) {
+				// Board output 
+				if (i == 1 and j == 0) {
+					cout << endl;
+				}
+				if (i == 2 and j == 0) {
+					cout << endl;
+				}
+				cout << board[i][j] << "|";
 			}
-			if (i == 2 and j == 0)
-			{
-				cout << endl;
-			}
-			cout << board[i][j] << "|";
+		cout << endl << "Player 1 input a number value of 0-8 to play 'X' " << endl;
+		cin >> board_inputp1;
+		if (board_inputp1 == board_inputp2) {
+			cout << "Select new number Player 1" << endl;
+			cin >> board_inputp1;
 		}
-	do {
-// Plyaer 1 input
-		cout << "Player 1 input a number value of 0-8 to enter your character " << endl;
-		cin >> board_input;
-		switch (board_input)
+		switch (board_inputp1)
 		{
 		case 0: board[0][0] = 'X';
 			break;
@@ -49,11 +51,75 @@ int main()  //the main function
 			break;
 		default: cout << "Not a valid number" << endl;
 			break;
-		} 
-// player 2 input
-		cout << "Player 2 input a number value of 0-8 to enter your character " << endl;
-		cin >> board_input;
-		switch (board_input)
+		}   
+		//Check for win
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++) {
+				// Checks columns for wins
+				if (board[0][j] && board[1][j] == board[2][j]) {
+					if (board[2][j] == 'X') {
+						cout << "X wins" << endl;
+						win = true;
+					}
+					else if (board[2][j] == 'O') {
+						cout << "O wins" << endl;
+						win = true; 
+					}
+				}
+				//Checks rows for wins
+				if (board[i][0] && board[i][1] == board[i][2]) {
+					if (board[i][2] == 'X') {
+						cout << "X wins" << endl;
+						win = true;
+					}
+					else if (board[i][2] == 'O') {
+						cout << "O wins" << endl;
+						win = true;  
+		
+					}
+				}
+				// Checks for diagnols 
+				if (board[0][0] && board[1][1] == board[2][2]) {
+					if (board[2][2] == 'X') {
+						cout << "X wins" << endl;
+						win = true;
+					}
+					else if (board[2][2] == 'O') {
+						cout << "O wins" << endl;
+						win = true;
+					}
+				}
+				if (board[0][2] && board[1][1] == board[2][0]) {
+					if (board[2][0] == 'X') {
+						cout << "X wins" << endl;
+						win = true;
+					}
+					else if (board[2][0] == 'O') {
+						cout << "O wins" << endl;
+						win = true;
+					}
+				}
+
+			}   
+		//Board output
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++) { 
+				if (i == 1 and j == 0) {
+					cout << endl;
+				}
+				if (i == 2 and j == 0) {
+					cout << endl;
+				}
+				cout << board[i][j] << "|";
+			}
+		//Player 2 input
+		cout << endl << "Player 2 input a number value of 0-8 to play 'O' " << endl;
+		cin >> board_inputp2;
+		if (board_inputp1 == board_inputp2) {
+			cout << "Select new number Player 2" << endl;
+			cin >> board_inputp2;
+		}
+		switch (board_inputp2)
 		{
 		case 0: board[0][0] = 'O';
 			break;
@@ -76,72 +142,7 @@ int main()  //the main function
 		default: cout << "Not a valid number" << endl;
 			break;
 		}
-		for (int i = 0; i < 3; i++)
-			for (int j = 0; j < 3; j++)
-			{
-				// Checks columns for wins
-				if (board[0][j] && board[1][j] == board[2][j]) {
-					if (board[0][j] == 'X') {
-						cout << "X wins" << endl;
-						win = true; 
-						break;
-					}
-					else if (board[0][j] == 'O') {
-						cout << "O wins" << endl;
-						win = true; 
-						break;
-					}
-				}
-				//Checks rows for wins
-				if (board[i][0] && board[i][1] == board[i][2]) {
-					if (board[i][0] == 'X') {
-						cout << "X wins" << endl;
-						win = true;
-						break;
-					}
-					else if (board[i][0] == 'O') {
-						cout << "O wins" << endl;
-						win = true; 
-						break;
-					}
-				}
-				// Checks for diagnols 
-				if (board[0][0] && board[1][1] == board[2][2]) {
-					if (board[i][0] == 'X') {
-						cout << "X wins" << endl;
-						win = true; 
-						break;
-					}
-					else if (board[i][0] == 'O') {
-						cout << "O wins" << endl;
-						win = true; 
-						break;
-					}
-				}
-				if (board[0][2] && board[1][1] == board[2][0]) {
-					if (board[i][0] == 'X') {
-						cout << "X wins" << endl;
-						win = true; 
-						break;
-					}
-					else if (board[i][0] == 'O') {
-						cout << "O wins" << endl;
-						win = true; 
-						break;
-					}
-				} 
-				if (i == 1 and j == 0)
-				{
-					cout << endl;
-				}
-				if (i == 2 and j == 0)
-				{
-					cout << endl;
-				}
-				cout << board[i][j] << "|";
-			}   
-		cout << endl;
 	} while (win != true);
 	system("pause");  //Prevents the console from closing on exit.  
 	return 0;  //Returns whatever is defined by the function return type
-}//End of main
+}//End of main  
