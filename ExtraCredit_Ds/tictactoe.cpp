@@ -58,11 +58,11 @@ int main() //the main function
 				if (board[0][j] && board[1][j] == board[2][j]) {
 					if (board[2][j] == 'X') {
 						cout << "X wins" << endl;
-						win = true;
+						win = true;  
 					}
 					else if (board[2][j] == 'O') {
 						cout << "O wins" << endl;
-						win = true; 
+						win = true;  
 					}
 				}
 				//Checks rows for wins
@@ -73,19 +73,18 @@ int main() //the main function
 					}
 					else if (board[i][2] == 'O') {
 						cout << "O wins" << endl;
-						win = true;  
-		
+						win = true;   
 					}
 				}
 				// Checks for diagnols 
 				if (board[0][0] && board[1][1] == board[2][2]) {
 					if (board[2][2] == 'X') {
 						cout << "X wins" << endl;
-						win = true;
+						win = true; 
 					}
 					else if (board[2][2] == 'O') {
 						cout << "O wins" << endl;
-						win = true;
+						win = true; 
 					}
 				}
 				if (board[0][2] && board[1][1] == board[2][0]) {
@@ -95,7 +94,7 @@ int main() //the main function
 					}
 					else if (board[2][0] == 'O') {
 						cout << "O wins" << endl;
-						win = true;
+						win = true; 
 					}
 				}
 
@@ -140,7 +139,7 @@ int main() //the main function
 			break;
 		default: cout << "Not a valid number" << endl;
 			break;
-		}
+		} 
 	} while (win != true);
 	system("pause");  //Prevents the console from closing on exit.  
 	return 0;  //Returns whatever is defined by the function return type
